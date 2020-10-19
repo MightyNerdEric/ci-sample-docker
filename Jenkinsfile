@@ -18,7 +18,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    image = docker.build('ci-sample-docker')
+                    image = docker.build('lfitsandbox/ci-sample-docker')
                 }
             }
         }
@@ -28,6 +28,7 @@ pipeline {
                     docker.withRegistry("https://docker.io",
                                         "dockerhub-lfitsandbox") {
                         image.push("latest")
+                        image.push("release")
                     }
                 }
             }
