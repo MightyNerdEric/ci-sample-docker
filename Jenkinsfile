@@ -25,8 +25,13 @@ pipeline {
         stage('Docker Push') {
             steps {
                 script {
-                    docker.withRegistry("https://docker.io",
+                    docker.withRegistry("",
                                         "dockerhub-lfitsandbox") {
+                        image.push("latest")
+                        image.push("release")
+                    }
+                    docker.withRegistry("https://ghcr.io",
+                                        "gh-push-packages") {
                         image.push("latest")
                         image.push("release")
                     }
